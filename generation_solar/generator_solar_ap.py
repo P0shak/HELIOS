@@ -1,4 +1,5 @@
 import os
+from dotenv import load_dotenv
 import json
 import random
 import time
@@ -7,7 +8,7 @@ from zoneinfo import ZoneInfo
 
 from azure.eventhub import EventHubProducerClient, EventData
 
-
+load_dotenv()
 # ============================================================
 # CONFIGURATION
 # ============================================================
