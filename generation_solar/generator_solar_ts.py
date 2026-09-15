@@ -13,7 +13,7 @@ load_dotenv()
 # CONFIGURATION
 # ============================================================
 
-EVENT_HUB_CONNECTION_STRING = os.getenv("EVENT_HUB_CONNECTION_STRING")
+EVENT_HUB_CONNECTION_STRING = os.getenv("EVENT_HUB_CONNECTION_STRING_SOLAR")
 EVENT_HUB_NAME = "helios_solar"
 
 TIMEZONE = ZoneInfo("Asia/Kolkata")
@@ -174,14 +174,16 @@ def classify_temperature(temperature):
     elif temperature < 45:
         return "MODERATE"
 
-    elif temperature < 55:
-        return "HIGH"
-
-    elif temperature < 65:
-        return "VERY_HIGH"
-
     else:
-        return "CRITICAL"
+        return "MODERATE"
+    # elif temperature < 55:
+    #     return "HIGH"
+    #
+    # elif temperature < 65:
+    #     return "VERY_HIGH"
+    #
+    # else:
+    #     return "CRITICAL"
 
 
 # ============================================================
@@ -257,37 +259,37 @@ POWER_RANGES_KW = {
         (40, 50, 3.1, 3.6),
         (50, 60, 2.8, 3.3),
         (60, 90, 2.3, 2.9)
-    ],
-
-    "HIGH": [
-        (0, 10, 2.4, 3.0),
-        (10, 15, 2.7, 3.3),
-        (15, 20, 2.9, 3.4),
-        (20, 40, 3.1, 3.5),
-        (40, 50, 2.9, 3.4),
-        (50, 60, 2.6, 3.1),
-        (60, 90, 2.2, 2.8)
-    ],
-
-    "VERY_HIGH": [
-        (0, 10, 2.3, 2.9),
-        (10, 15, 2.6, 3.2),
-        (15, 20, 2.8, 3.3),
-        (20, 40, 3.0, 3.4),
-        (40, 50, 2.8, 3.3),
-        (50, 60, 2.5, 3.0),
-        (60, 90, 2.1, 2.7)
-    ],
-
-    "CRITICAL": [
-        (0, 10, 1.5, 2.3),
-        (10, 15, 1.8, 2.5),
-        (15, 20, 2.0, 2.7),
-        (20, 40, 2.2, 2.9),
-        (40, 50, 2.0, 2.7),
-        (50, 60, 1.7, 2.4),
-        (60, 90, 2.1, 2.7)
     ]
+
+    # "HIGH": [
+    #     (0, 10, 2.4, 3.0),
+    #     (10, 15, 2.7, 3.3),
+    #     (15, 20, 2.9, 3.4),
+    #     (20, 40, 3.1, 3.5),
+    #     (40, 50, 2.9, 3.4),
+    #     (50, 60, 2.6, 3.1),
+    #     (60, 90, 2.2, 2.8)
+    # ],
+    #
+    # "VERY_HIGH": [
+    #     (0, 10, 2.3, 2.9),
+    #     (10, 15, 2.6, 3.2),
+    #     (15, 20, 2.8, 3.3),
+    #     (20, 40, 3.0, 3.4),
+    #     (40, 50, 2.8, 3.3),
+    #     (50, 60, 2.5, 3.0),
+    #     (60, 90, 2.1, 2.7)
+    # ],
+    #
+    # "CRITICAL": [
+    #     (0, 10, 1.5, 2.3),
+    #     (10, 15, 1.8, 2.5),
+    #     (15, 20, 2.0, 2.7),
+    #     (20, 40, 2.2, 2.9),
+    #     (40, 50, 2.0, 2.7),
+    #     (50, 60, 1.7, 2.4),
+    #     (60, 90, 2.1, 2.7)
+    # ]
 }
 
 
@@ -581,26 +583,26 @@ def generate_power_per_minute(
     # High temperature derating
     # --------------------------------------------------------
 
-    if category == "HIGH":
-
-        generation *= random.uniform(
-            0.90,
-            0.97
-        )
-
-    elif category == "VERY_HIGH":
-
-        generation *= random.uniform(
-            0.75,
-            0.88
-        )
-
-    elif category == "CRITICAL":
-
-        generation *= random.uniform(
-            0.50,
-            0.70
-        )
+    # if category == "HIGH":
+    #
+    #     generation *= random.uniform(
+    #         0.90,
+    #         0.97
+    #     )
+    #
+    # elif category == "VERY_HIGH":
+    #
+    #     generation *= random.uniform(
+    #         0.75,
+    #         0.88
+    #     )
+    #
+    # elif category == "CRITICAL":
+    #
+    #     generation *= random.uniform(
+    #         0.50,
+    #         0.70
+    #     )
 
     # --------------------------------------------------------
     # Never exceed maximum 83.33 Wh/min
